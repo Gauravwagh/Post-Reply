@@ -1,0 +1,31 @@
+{% for postone in post %}
+<div class="testmain span11">
+   <div class="span1 test1"><img src="/media/img/User.png" width="70" height="70" class="img-circle img-responsive"/></div>
+   <div class="span8 second">
+      <div class="test1 span5"><a><strong>{{postone.user}}</strong></a></div>
+      <br/>{{postone.time}}<br/><br/>
+      <div class="test1 span7">{{postone.post}}</div>
+      <div class="test span8"><img src="/media/{{postone.image}}" width="300" height="300"/></div>
+      <div class="span8" style="margin-bottom:2%;"><a  class="replytopost" style="margin-left:-4%;" onclick='tog({{postone.pk}})'>Reply<span class="badge">{{postone.number_of_reply}}</span></a><input class="id5" type="hidden" value='{{postone.pk	}}'></div>
+      <div id='{{postone.pk}}1' class="hid" style="">
+      
+      <br/>
+      {% for rep1 in postone.rep %}
+      <div style="margin-top:2%;">
+         <div class="span1 "><img src="/media/img/User.png" class="img-circle img-responsive" width="50" height="50"></div>
+         
+            <div class=" span5"><a><strong>{{rep1.user}}</strong></a></div>            
+            <div class=" span5" style="margin-top:1%">{{rep1}}</div>
+           <div class=" span6" style="margin-top:3%; font-size:0.9em;">{% load humanize %} {{postone.time|naturaltime}}</div><hr>
+       </div>
+         {% endfor %}
+         
+         <div class="span8">
+         <form method="post" action="." enctype="multipart/form-data" class="horizontal-form" role="form" id='{{postone.pk}}' style="">
+      <input type="text" id='{{postone.pk}}2' name="lname" class="rep1"  style="border-radius: 0px; "><input type="button"  onclick="save_reply({{postone.pk}})" class="btn btn-info replysave" id='{{postone.pk}}' value="Reply" style="border-radius: 0px; margin-bottom: 10px;"/>
+	</form>
+	</div>
+      </div>
+   </div>
+</div>
+{% endfor %}

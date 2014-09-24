@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+
+	{% block content %}
+	<style>
+		#id_post
+		{
+			width:100%;
+			height:70px;
+		}
+		.test1
+		{
+			margin-top:2%;
+
+		}
+		.test
+		{
+			margin-left:10%;
+			margin-top:1%;
+		}
+		.testmain
+		{
+			
+			margin-top:2%;
+			background-color:#A9F5F2;
+			margin-bottom:2%;
+			
+		}
+		.rep
+		{
+			float:right;
+		}
+		.hid
+		{
+			
+
+		}
+	</style>
+
+	<div class="row" style="margin-top:5em;">
+	<h1>Post here what's in your mind</h1>
+	<div>
+	 {% block message %}
+	   {% include "includes/messages.html"%}
+	{% endblock %}
+	</div>
+		<form method="post" action="." enctype="multipart/form-data" class="horizontal-form" role="form" style="">{% csrf_token %}
+			<div class="span11">
+  				
+  					{{ postform.post }}
+  				
+
+			</div>
+			<div class="span7" style="margin-top:1%;">
+  				{{postform.image}}
+  			</div><div class="span4" style="margin-top:1%; "><input type="submit" style="float:right;" id="new" class="btn btn-info" value="submit" /><input id="idattach" type="hidden" value=''></div>			<!--<div class="col-md-4" style="margin-top:3%;">
+  				<input type="submit" class="btn btn-info" value="submit" />
+  			</div> -->
+		</form>
+		<div class="bg-info posts " style="margin-top:3%;">
+
+		</div>
+
+		</div>
+		
+		<script>
+				$(function () {
+  							
+						$.ajax({
+								type:"GET",
+								url:"/home/Display_post/",
+								dataType:"html",
+								success:function(html){
+
+													
+													
+														
+														$(".posts").html(html);
+													
+								},	
+								error: function(){
+                							alert("error");
+            								}
+							});
+							
+
+
+					});
+
+				function test()
+				{
+					$.ajax({
+								type:"GET",
+								url:"/home/Display_post/",
+								dataType:"html",
+								success:function(html){
+
+													
+													
+														
+														$(".posts").html(html);
+													
+								},	
+								error: function(){
+                							alert("error");
+            								}
+							});
+				}
+					$( document ).ready(function() {
+							//tog();
+							
+							});
+					function tog(v)
+							{
+								
+							$( "#"+v+"1" ).toggle();
+						}
+
+
+					function save_reply(s)
+					{
+						alert(s);
+													
+													var reply = $( "#"+s+"2" ).val();
+													
+													alert(reply);
+													
+													data = {
+															reply: reply,
+															
+														};
+													$.ajax({
+															url: "/home/reply_save/"+s,
+															type: "POST",
+															data: data,
+															success: function (response) {
+																	test();
+																							
+																			},
+																error: function () {
+																						
+																				}
+														});
+					}
+
+					
+
+
+</script>
+
+<!-- $(function () {
+  							
+						$.ajax({
+								type:"GET",
+								url:"/home/Display_post/",
+								dataType:"json",
+								success:function(response){
+
+													
+													len = response.length;
+													
+													for(i=0; i<=len;i++)
+													{
+														post = response[i].postdata;
+														user = response[i].userdata;
+														image = response[i].postimage;
+														pk = response[i].idpk;
+														
+														$(".posts").append('<div class="testmain col-md-11"><div class="col-md-1 test1"><img src="/media/'+image+'" width="70" height="70" /></div><div class="col-md-11 test1">'+user+'</div><div class="col-md-6 test1">'+post+'</div><div class="col-md-9 test"><img src="/media/'+image+'" width="300" height="300" /></div><div class="col-md-8"><input type="submit" align="center" class="btn btn-info rep" id='+pk+' value="Reply" onclick="tog(this)"/><input class="id5" type="hidden" value='+pk+'></div><div style="display: none;" class="hid col-md-11"><input type="text" name="lname"><input type="submit"  onclick="save_reply()" class="btn btn-info replysave" id='+pk+' value="Reply" /></div></div>');
+													}
+								},	
+								error: function(){
+                							alert("error");
+            								}
+							});
+							
+
+
+					});-->
+
+	{% endblock %}
+
+
+

@@ -11,9 +11,11 @@ What you need for this application
   
   Installation:-
   
-  pip install django-registration
-  pip install south
-  pip install djangorestframework
+pip install django-registration
+
+pip install south
+
+pip install djangorestframework
   
 Discription:-
 
